@@ -7,7 +7,10 @@ spring:
       enable-auto-commit: false
     producer:
       acks: all
-
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/assetDB
+    username: admin
+    password: password
   data:
     mongodb:
       uri: mongodb://admin:password@localhost:27017/assetsDB

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Asset file upload request")
-public class AssetFileUploadRequest {
+public class AssetsFileUploadRequest {
 
   @Schema(description = "Name of the asset", example = "profile-image")
   private String name;

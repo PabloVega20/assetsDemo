@@ -1,10 +1,10 @@
-package interview.assets.demo.persistence.adapters;
+package interview.assets.demo.persistence.mongo.adapters;
 
 import interview.assets.demo.domain.interfaces.IAssetsRequestAdapter;
 import interview.assets.demo.domain.interfaces.IAssetsRequestMapper;
 import interview.assets.demo.domain.objects.AssetsRequest;
-import interview.assets.demo.persistence.documents.AssetsRequestDocument;
-import interview.assets.demo.persistence.repositories.IAssetsRequestMongoRepository;
+import interview.assets.demo.persistence.mongo.documents.AssetsRequestDocument;
+import interview.assets.demo.persistence.mongo.repositories.IAssetsRequestMongoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;

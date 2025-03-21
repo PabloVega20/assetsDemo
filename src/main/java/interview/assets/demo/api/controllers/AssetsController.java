@@ -1,8 +1,8 @@
 package interview.assets.demo.api.controllers;
 
 import interview.assets.demo.api.IApiAssetsRequestMapper;
-import interview.assets.demo.api.dtos.AssetFileUploadRequest;
-import interview.assets.demo.api.dtos.AssetFileUploadResponse;
+import interview.assets.demo.api.dtos.AssetsFileUploadRequest;
+import interview.assets.demo.api.dtos.AssetsFileUploadResponse;
 import interview.assets.demo.domain.interfaces.IAssetsRequestService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -34,15 +34,15 @@ public class AssetsController {
       description = "Upload an asset file and return the asset ID"
   )
   @ApiResponse(responseCode = "202", description = "Asset uploaded successfully",
-      content = @Content(schema = @Schema(implementation = AssetFileUploadResponse.class)))
+      content = @Content(schema = @Schema(implementation = AssetsFileUploadResponse.class)))
   @ApiResponse(responseCode = "400", description = "Invalid input")
   @ApiResponse(responseCode = "500", description = "Internal server error")
   @PostMapping("/actions/upload")
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public Mono<AssetFileUploadResponse> uploadAssetFile(
-      @RequestBody AssetFileUploadRequest request) {
+  public Mono<AssetsFileUploadResponse> uploadAssetFile(
+      @RequestBody AssetsFileUploadRequest request) {
     return assetsService.uploadAsset(apiAssetsMapper.toDomain(request))
-        .map(AssetFileUploadResponse::new);
+        .map(AssetsFileUploadResponse::new);
   }
 
   @Operation(

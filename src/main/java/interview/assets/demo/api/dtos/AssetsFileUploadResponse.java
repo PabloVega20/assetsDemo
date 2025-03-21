@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Asset file upload response")
-public class AssetFileUploadResponse {
+public class AssetsFileUploadResponse {
 
   @Schema(description = "ID of the uploaded asset", example = "60f1e5b5e8f87c001234abcd")
   private String id;
