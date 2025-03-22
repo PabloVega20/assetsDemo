@@ -31,3 +31,26 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Docker ###
+# Docker data directories (if using bind mounts)
+data/
+docker/data/
+
+# Specific database directories (if using bind mounts)
+postgres-data/
+mongo-data/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store

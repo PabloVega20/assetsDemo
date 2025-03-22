@@ -19,6 +19,6 @@ public class AssetsRequestAdapter implements IAssetsRequestAdapter {
   @Override
   public Mono<String> upload(AssetsRequest assetsRequest) {
     AssetsRequestDocument assetsRequestDocument = assetsMapper.toDocument(assetsRequest);
-    return assetsRepository.save(assetsRequestDocument).map(a -> a.getId());
+    return assetsRepository.save(assetsRequestDocument).map(AssetsRequestDocument::getId);
   }
 }

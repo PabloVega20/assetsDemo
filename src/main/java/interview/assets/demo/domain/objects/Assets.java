@@ -14,6 +14,6 @@ public class Assets {
   private String filename;
   private String contentType;
   private String url;
-  private Long size;
+  private Integer size;
   private LocalDateTime uploadDate;
 }

@@ -27,7 +27,7 @@ public class AssetsEntity {
   private String url;
 
   @Column
-  private Long size;
+  private Integer size;
 
   @Column("upload_date")
   private LocalDateTime uploadDate;

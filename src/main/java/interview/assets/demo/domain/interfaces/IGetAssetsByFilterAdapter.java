@@ -4,7 +4,7 @@ import interview.assets.demo.domain.objects.Assets;
 import java.time.LocalDateTime;
 import reactor.core.publisher.Flux;
 
-public interface IAssetGetAdapter {
+public interface IGetAssetsByFilterAdapter {
 
   /**
    * Retrieves assets based on the provided filter criteria
@@ -13,21 +13,11 @@ public interface IAssetGetAdapter {
    * @param uploadDateEnd   The end date for filtering by upload date range
    * @param filename        The filename expression for filtering (regex)
    * @param filetype        The file type for filtering
-   * @param sortDirection   The direction to sort results (ASC or DESC)
    * @return A Flux of Asset objects matching the criteria
    */
-  Flux<Assets> getAsset(
+  Flux<Assets> getAssetsByFilter(
       LocalDateTime uploadDateStart,
       LocalDateTime uploadDateEnd,
       String filename,
-      String filetype,
-      SortDirection sortDirection
-  );
-
-  /**
-   * Enum representing sort direction options
-   */
-  enum SortDirection {
-    ASC, DESC
-  }
+      String filetype);
 }
