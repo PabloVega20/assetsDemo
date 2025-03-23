@@ -1,6 +1,6 @@
-package interview.assets.demo.persistence.repositories;
+package interview.assets.demo.persistence.mongo.repositories;
 
-import interview.assets.demo.persistence.documents.AssetsRequestDocument;
+import interview.assets.demo.persistence.mongo.documents.AssetsRequestDocument;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package interview.assets.demo.persistence.documents;
+package interview.assets.demo.persistence.mongo.documents;
 
 import interview.assets.demo.domain.objects.enums.AssetStatus;
 import java.time.Instant;
@@ -19,7 +19,7 @@ public class AssetsRequestDocument {
   @Id
   private String id;
   private String fileName;
-  
+
   @Setter
   private byte[] encodedFile; // Binary
   private String contentType;

@@ -7,10 +7,16 @@ spring:
       enable-auto-commit: false
     producer:
       acks: all
-
   data:
     mongodb:
       uri: mongodb://admin:password@localhost:27017/assetsDB
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/assetDB
+    username: admin
+    password: password
+    pool:
+      initial-size: 5
+      max-size: 20
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
@@ -22,3 +28,7 @@ springdoc:
     operationsSorter: method
     tagsSorter: alpha
     filter: true
+kafka:
+  topic:
+    assets:
+      request: assetsRequest

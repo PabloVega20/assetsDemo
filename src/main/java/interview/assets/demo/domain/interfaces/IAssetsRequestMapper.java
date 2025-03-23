@@ -1,7 +1,7 @@
 package interview.assets.demo.domain.interfaces;
 
 import interview.assets.demo.domain.objects.AssetsRequest;
-import interview.assets.demo.persistence.documents.AssetsRequestDocument;
+import interview.assets.demo.persistence.mongo.documents.AssetsRequestDocument;
 import java.util.Base64;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
