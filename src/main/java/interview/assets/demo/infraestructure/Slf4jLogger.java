@@ -12,23 +12,8 @@ public class Slf4jLogger implements ILogger {
   }
 
   @Override
-  public void debug(String message) {
-    logger.debug(message);
-  }
-
-  @Override
   public void info(String message) {
     logger.info(message);
-  }
-
-  @Override
-  public void warn(String message) {
-    logger.warn(message);
-  }
-
-  @Override
-  public void warn(String message, Throwable throwable) {
-    logger.warn(message, throwable);
   }
 
   @Override
