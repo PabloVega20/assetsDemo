@@ -1,4 +1,4 @@
-package interview.assets.demo.api;
+package interview.assets.demo.api.mappers;
 
 import interview.assets.demo.api.dtos.AssetsFileUploadRequest;
 import interview.assets.demo.domain.objects.AssetsRequest;

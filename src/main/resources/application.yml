@@ -28,3 +28,7 @@ springdoc:
     operationsSorter: method
     tagsSorter: alpha
     filter: true
+kafka:
+  topic:
+    assets:
+      request: assetsRequest

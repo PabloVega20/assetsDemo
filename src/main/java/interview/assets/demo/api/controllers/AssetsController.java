@@ -1,12 +1,13 @@
 package interview.assets.demo.api.controllers;
 
-import interview.assets.demo.api.IApiAssetsMapper;
-import interview.assets.demo.api.IApiAssetsRequestMapper;
 import interview.assets.demo.api.dtos.AssetsDTO;
 import interview.assets.demo.api.dtos.AssetsFileUploadRequest;
 import interview.assets.demo.api.dtos.AssetsFileUploadResponse;
+import interview.assets.demo.api.mappers.IApiAssetsMapper;
+import interview.assets.demo.api.mappers.IApiAssetsRequestMapper;
 import interview.assets.demo.domain.interfaces.IAssetsRequestService;
 import interview.assets.demo.domain.interfaces.IGetAssetsByFilterService;
+import interview.assets.demo.domain.objects.exceptions.GeneralException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -51,7 +52,7 @@ public class AssetsController {
   @PostMapping("/actions/upload")
   @ResponseStatus(HttpStatus.ACCEPTED)
   public Mono<AssetsFileUploadResponse> uploadAssetFile(
-      @RequestBody AssetsFileUploadRequest request) {
+      @RequestBody AssetsFileUploadRequest request) throws GeneralException {
     return assetsRequestService.uploadAsset(apiAssetsRequestMapper.toDomain(request))
         .map(AssetsFileUploadResponse::new);
   }
@@ -96,7 +97,7 @@ public class AssetsController {
 
       @Parameter(description = "SortDirection of uploadDate of the Assets")
       @RequestParam(required = false) String sortDirection
-  ) {
+  ) throws GeneralException {
     return getAssetsByFilterService.getAssetsByFilter(startDate, endDate,
         filename, contentType, sortDirection
     ).map(apiAssetsMapper::toDTO);

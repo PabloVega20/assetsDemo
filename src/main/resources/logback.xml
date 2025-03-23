@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <property name="LOGS" value="./logs"/>
+
+
+  <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{ISO8601} %highlight(%-5level) [%blue(%t)] %yellow(%C{1}): %msg%n%throwable
+      </pattern>
+    </encoder>
+  </appender>
+
+
+  <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOGS}/application.log</file>
+    <encoder>
+      <pattern>%d{ISO8601} %-5level [%thread] %logger{36} - %msg%n%throwable</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOGS}/application-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+      <maxHistory>30</maxHistory>
+      <totalSizeCap>3GB</totalSizeCap>
+    </rollingPolicy>
+  </appender>
+
+
+  <appender name="Async" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="RollingFile"/>
+    <queueSize>512</queueSize>
+    <discardingThreshold>0</discardingThreshold>
+    <includeCallerData>true</includeCallerData>
+  </appender>
+
+  <logger name="io.netty" level="ERROR"/>
+  <logger name="reactor" level="ERROR"/>
+  <logger name="org.apache.kafka" level="ERROR"/>
+  <logger name="org.mongodb.driver" level="ERROR"/>
+  <logger name="org.springframework" level="ERROR"/>
+  <logger name="interview.assets.demo" level="DEBUG"/>
+
+
+  <root level="ERROR">
+    <appender-ref ref="Console"/>
+    <appender-ref ref="Async"/>
+  </root>
+</configuration>
