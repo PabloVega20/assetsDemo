@@ -11,7 +11,7 @@
   </parent>
   <groupId>interview</groupId>
   <artifactId>assets.demo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>assetsDemo</name>
   <description>Demo project assetsRequest</description>
   <url/>
