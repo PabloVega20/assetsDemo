@@ -8,4 +8,7 @@ import org.mapstruct.Mapper;
 public interface IAssetsMapper {
 
   Assets toDomain(AssetsEntity entity);
+
+  AssetsEntity toEntity(Assets entity);
+
 }

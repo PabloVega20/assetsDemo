@@ -2,6 +2,7 @@ package interview.assets.demo.application;
 
 import interview.assets.demo.config.LoggingConfiguration.LoggerFactory;
 import interview.assets.demo.domain.interfaces.IAssetsRequestAdapter;
+import interview.assets.demo.domain.interfaces.IAssetsRequestMapper;
 import interview.assets.demo.domain.interfaces.IAssetsRequestService;
 import interview.assets.demo.domain.interfaces.IKafkaProducer;
 import interview.assets.demo.domain.interfaces.ILogger;
@@ -13,12 +14,13 @@ import reactor.core.publisher.Mono;
  * Service implementation for handling asset requests. Integrates with a data adapter and Kafka
  * messaging in a fully reactive manner.
  */
-public class AssetsRequestService implements IAssetsRequestService {
+public class AssetsUploadRequestService implements IAssetsRequestService {
 
   private final String assetsTopic;
   private final IAssetsRequestAdapter assetsAdapter;
   private final IKafkaProducer kafkaProducer;
   private final ILogger log;
+  private final IAssetsRequestMapper assetsMapper;
 
   /**
    * Constructs a new AssetsRequestService with required dependencies.
@@ -26,14 +28,17 @@ public class AssetsRequestService implements IAssetsRequestService {
    * @param assetsAdapter The adapter for uploading asset requests
    * @param assetsTopic   The Kafka topic to which asset messages will be sent
    * @param kafkaProducer The reactive Kafka producer for sending messages
+   * @param assetsMapper  The assetsMapper
+   * @param log           The LoggerFactory for logging.
    */
-  public AssetsRequestService(IAssetsRequestAdapter assetsAdapter, String assetsTopic,
+  public AssetsUploadRequestService(IAssetsRequestAdapter assetsAdapter, String assetsTopic,
       IKafkaProducer kafkaProducer,
-      LoggerFactory log) {
+      LoggerFactory log, IAssetsRequestMapper assetsMapper) {
     this.assetsAdapter = assetsAdapter;
     this.assetsTopic = assetsTopic;
     this.kafkaProducer = kafkaProducer;
-    this.log = log.getLogger(AssetsRequestService.class);
+    this.log = log.getLogger(AssetsUploadRequestService.class);
+    this.assetsMapper = assetsMapper;
   }
 
   /**
@@ -46,8 +51,11 @@ public class AssetsRequestService implements IAssetsRequestService {
   @Override
   public Mono<String> uploadAsset(AssetsRequest assets) throws GeneralException {
     try {
+      if (assets.getFileName() == null || assets.getFileName().isEmpty()) {
+        throw new GeneralException("Assets file name cannot be empty");
+      }
       log.info(String.format("Uploading assetRequest: %s", assets));
-      return assetsAdapter.upload(assets)
+      return assetsAdapter.upload(assetsMapper.toDocument(assets))
           .flatMap(id ->
               kafkaProducer.sendMessage(assetsTopic, id)
                   .thenReturn(id)
