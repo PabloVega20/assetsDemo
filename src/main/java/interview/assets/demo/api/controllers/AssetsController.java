@@ -98,6 +98,7 @@ public class AssetsController {
       @Parameter(description = "SortDirection of uploadDate of the Assets")
       @RequestParam(required = false) String sortDirection
   ) throws GeneralException {
+
     return getAssetsByFilterService.getAssetsByFilter(startDate, endDate,
         filename, contentType, sortDirection
     ).map(apiAssetsMapper::toDTO);

@@ -25,11 +25,7 @@ public class ReactiveKafkaProducer implements IKafkaProducer {
    */
   @Override
   public Mono<Void> sendMessage(String topic, String message) {
-    // Send the message to the specified topic
-    // We're using a null key for simplicity, but you could use a specific key if needed
     return reactiveKafkaTemplate.send(topic, null, message)
-        // The send() method returns a Mono<SenderResult>, but we only want to complete the flow
-        // without emitting any value, so we use then() to convert it to Mono<Void>
         .then();
   }
 }

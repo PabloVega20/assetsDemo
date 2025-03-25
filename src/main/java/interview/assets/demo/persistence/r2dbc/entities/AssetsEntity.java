@@ -24,6 +24,9 @@ public class AssetsEntity {
   private String contentType;
 
   @Column
+  private byte[] content;
+
+  @Column
   private String url;
 
   @Column
