@@ -94,9 +94,7 @@ class TaskSchedulerServiceTest {
     when(adapter.save(mockAsset)).thenReturn(Mono.empty());
     when(mongoAdapter.upload(any(AssetsRequestDocument.class))).thenReturn(Mono.empty());
 
-    StepVerifier.create(taskSchedulerService.executeTask())
-        .expectComplete()
-        .verify();
+    taskSchedulerService.executeTask();
 
     verify(logger, times(5)).info(any(String.class));
     verify(adapter).save(mockAsset);
@@ -110,9 +108,7 @@ class TaskSchedulerServiceTest {
     when(mongoAdapter.findById("testDocId")).thenReturn(
         Mono.error(new RuntimeException("Test error")));
 
-    StepVerifier.create(taskSchedulerService.executeTask())
-        .expectComplete()
-        .verify();
+    taskSchedulerService.executeTask();
 
     verify(logger).error(any(String.class), any(Throwable.class));
   }

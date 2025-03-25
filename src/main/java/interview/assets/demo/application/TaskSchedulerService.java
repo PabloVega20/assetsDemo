@@ -67,16 +67,16 @@ public class TaskSchedulerService {
    * Executes the primary task of consuming and processing Kafka messages. Handles document
    * retrieval, mapping, and status updates across multiple data stores.
    */
-  Mono<Void> executeTask() {
+  void executeTask() {
     log.info("Initiating Kafka consumer task at: " + now());
 
-    return kafkaConsumer.consumeMessages()
+    kafkaConsumer.consumeMessages()
         .flatMap(this::processDocument)
         .onErrorContinue((ex, obj) ->
             log.error("Global error processing Kafka message: " + obj, ex))
-        .then()
-        .doOnSuccess(v -> log.info("Completed Kafka message processing"))
-        .doOnError(error -> log.error("Unhandled error in message processing flux", error));
+        .subscribe(
+            v -> log.info("Completed Kafka message processing"),
+            error -> log.error("Unhandled error in message processing flux", error));
   }
 
   /**

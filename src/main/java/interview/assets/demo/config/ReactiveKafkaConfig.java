@@ -66,8 +66,8 @@ public class ReactiveKafkaConfig {
     ReceiverOptions<String, String> receiverOptions = ReceiverOptions.<String, String>create(
             consumerProps).commitInterval(Duration.ofSeconds(1))
         .commitBatchSize(10)
-        .addAssignListener(partitions -> log.info("Assigned: {}", partitions))
-        .addRevokeListener(partitions -> log.info("Revoked: {}", partitions))
+        .addAssignListener(partitions -> log.trace("Assigned: {}", partitions))
+        .addRevokeListener(partitions -> log.trace("Revoked: {}", partitions))
         .subscription(Collections.singleton(assetsTopic));
 
     return KafkaReceiver.create(receiverOptions);

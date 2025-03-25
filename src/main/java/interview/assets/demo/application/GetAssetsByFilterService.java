@@ -70,7 +70,7 @@ public class GetAssetsByFilterService implements IGetAssetsByFilterService {
     try {
       Comparator<Assets> comparator = Comparator.comparing(Assets::getUploadDate);
       if ("desc".equals(sortDirection)) {
-        comparator.reversed();
+        comparator = comparator.reversed();
       }
       log.info("Retrieving assets");
       return adapter.getAssetsByFilter(uploadDateStart, uploadDateEnd, filename, filetype)
