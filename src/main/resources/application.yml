@@ -1,0 +1,28 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: my-group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+    producer:
+      acks: all
+  data:
+    mongodb:
+      uri: mongodb://admin:password@localhost:27017/assetsDB
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/assetDB
+    username: admin
+    password: password
+    pool:
+      initial-size: 5
+      max-size: 20
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+kafka:
+  topic:
+    assets:
+      request: assetsRequest
+  group-id:
+    assets: assets-processing-service
