@@ -84,7 +84,6 @@ public class TaskSchedulerService {
    * saves to PostgreSQL, and updates document status.
    *
    * @param documentId Unique identifier of the document to process
-   * @return Mono representing the completion of document processing
    */
   private Mono<AssetsRequestDocument> processDocument(String documentId) {
     return mongoAdapter.findById(documentId)
